@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Art_Capitals</string>
+    <string name="saratov_title">Саратов</string>
+    <string name="saratov_city">Был основан 2(12) июля 1590 года князем Григорием Засекиным и боярином Федором Туровым</string>
+    <string name="kazan_title">Казань</string>
+    <string name="kazan_city">Была основана в 1438 году как столица Казанского ханства Улу-Мухамедом, основана беженцами Перекола(татарами) из Крыма(Тавриды)</string>
+    <string name="toliati_title">Тольятти</string>
+    <string name="toliati_city">Был основан в 1737 году Василием Татищевым как город-крепость Ставрополь</string>
+    <string name="penza_title">Пенза</string>
+    <string name="penza_city">Была основана в 1663 году как город-крепость воеводой Ю.Е. Котраским по указу царя Алексея Михайловича от 3(13) мая 1663 года</string>
+    <string name="button_up">Назад</string>
+    <string name="button_next">Вперед</string>
+</resources>
