@@ -13,9 +13,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -52,60 +53,77 @@ fun One() {
         1 -> R.drawable.saratov
         2 -> R.drawable.kazan
         3 -> R.drawable.toliatti
-        else -> R.drawable.penza
+        4 -> R.drawable.penza
+        else -> R.drawable.saratov
     }
     val titleText = when(result) {
         1 -> R.string.saratov_title
         2 -> R.string.kazan_title
         3 -> R.string.toliati_title
-        else -> R.string.penza_title
+        4 -> R.string.penza_title
+        else -> R.string.saratov_title
     }
     val cityText = when(result) {
         1 -> R.string.saratov_city
         2 -> R.string.kazan_city
         3 -> R.string.toliati_city
-        else -> R.string.penza_city
+        4 -> R.string.penza_city
+        else -> R.string.saratov_city
     }
 
     Surface(
-        modifier = Modifier.padding(16.dp)
+        modifier = Modifier.padding(10.dp)
     ) {
             Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top,
+            verticalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier.padding(16.dp)
         ) {
             Image(
                 painter = painterResource(imageResource),
                 contentDescription = null,
-                modifier = Modifier
+                modifier = Modifier.size(350.dp).offset(x = (0).dp, y = (6).dp)
             )
-            Spacer( modifier = Modifier.height(40.dp))
+            Spacer( modifier = Modifier.height(10.dp))
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-                modifier = Modifier
+                verticalArrangement = Arrangement.Top,
+                modifier = Modifier.height(200.dp)
             ) {
                 Text(
                     text = stringResource(titleText),
                     style = MaterialTheme.typography.headlineSmall
                 )
-                Spacer(modifier = Modifier.height(40.dp))
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(
                     text = stringResource(cityText),
-                    style = MaterialTheme.typography.bodyLarge
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.offset(x = (10).dp, y = (10).dp)
                 )
             }
-            Spacer( modifier = Modifier.height(150.dp))
+            Spacer( modifier = Modifier.height(10.dp))
+
             Row(
-                horizontalArrangement = Arrangement.SpaceBetween
+                modifier = Modifier.fillMaxSize(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Top
             ) {
                 Button(
-                    onClick = { result-- }
+                    onClick = { if (result > 1){
+                        result--
+                    } else {
+                        result = 4
+                    } },
+                    modifier = Modifier.offset(x = (10).dp, y = (110).dp)
                 ) { Text(stringResource(R.string.button_up)) }
                 Spacer( modifier = Modifier.width(100.dp))
                 Button(
-                    onClick = { result++ }
+                    onClick = { if (result < 4){
+                        result++
+                    } else {
+                        result = 1
+                    } },
+                    modifier = Modifier.offset(x = (-15).dp, y = (110).dp)
                 ) { Text(stringResource(R.string.button_next)) }
             }
         }
