@@ -54,21 +54,24 @@ fun One() {
         2 -> R.drawable.kazan
         3 -> R.drawable.toliatti
         4 -> R.drawable.penza
-        else -> R.drawable.saratov
+        5 -> R.drawable.saratov
+        else -> R.drawable.moskva
     }
     val titleText = when(result) {
         1 -> R.string.saratov_title
         2 -> R.string.kazan_title
         3 -> R.string.toliati_title
         4 -> R.string.penza_title
-        else -> R.string.saratov_title
+        5 -> R.string.saratov_title
+        else -> R.string.moskva_title
     }
     val cityText = when(result) {
         1 -> R.string.saratov_city
         2 -> R.string.kazan_city
         3 -> R.string.toliati_city
         4 -> R.string.penza_city
-        else -> R.string.saratov_city
+        5 -> R.string.saratov_city
+        else -> R.string.moskva_city
     }
 
     Surface(
