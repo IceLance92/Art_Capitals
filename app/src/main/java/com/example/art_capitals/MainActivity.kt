@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -33,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import com.example.art_capitals.ui.theme.Art_CapitalsTheme
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.draw.clip
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,38 +42,31 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Art_CapitalsTheme {
-                One()
+                ArtworkScreen()
                 }
             }
         }
     }
 
 @Composable
-fun One() {
-    var result by remember { mutableStateOf(1) }
-    val imageResource = when(result) {
-        1 -> R.drawable.saratov
-        2 -> R.drawable.kazan
-        3 -> R.drawable.toliatti
-        4 -> R.drawable.penza
-        5 -> R.drawable.saratov
-        else -> R.drawable.moskva
+fun ArtworkScreen() {
+    var currentArtworkIndex by remember { mutableStateOf(0) }
+
+    val artworks = listOf(
+        ArtworkData(R.drawable.saratov, R.string.saratov_title, R.string.saratov_city),
+        ArtworkData(R.drawable.kazan, R.string.kazan_title, R.string.kazan_city),
+        ArtworkData(R.drawable.toliatti, R.string.toliati_title, R.string.toliati_city),
+        ArtworkData(R.drawable.penza, R.string.penza_title, R.string.penza_city)
+    )
+
+    val currentArtwork = artworks[currentArtworkIndex]
+
+    fun showPreviousArtwork() {
+        currentArtworkIndex = (currentArtworkIndex - 1 + artworks.size) % artworks.size
     }
-    val titleText = when(result) {
-        1 -> R.string.saratov_title
-        2 -> R.string.kazan_title
-        3 -> R.string.toliati_title
-        4 -> R.string.penza_title
-        5 -> R.string.saratov_title
-        else -> R.string.moskva_title
-    }
-    val cityText = when(result) {
-        1 -> R.string.saratov_city
-        2 -> R.string.kazan_city
-        3 -> R.string.toliati_city
-        4 -> R.string.penza_city
-        5 -> R.string.saratov_city
-        else -> R.string.moskva_city
+
+    fun showNextArtwork() {
+        currentArtworkIndex = (currentArtworkIndex + 1) % artworks.size
     }
 
     Surface(
@@ -83,9 +78,10 @@ fun One() {
             modifier = Modifier.padding(16.dp)
         ) {
             Image(
-                painter = painterResource(imageResource),
+                painter = painterResource(currentArtwork.imageResId),
                 contentDescription = null,
-                modifier = Modifier.size(350.dp).offset(x = (0).dp, y = (6).dp)
+                modifier = Modifier.size(350.dp).offset(x = (0).dp, y = (6).dp).clip(
+                    RoundedCornerShape(80.dp))
             )
             Spacer( modifier = Modifier.height(10.dp))
             Column(
@@ -94,12 +90,12 @@ fun One() {
                 modifier = Modifier.height(200.dp)
             ) {
                 Text(
-                    text = stringResource(titleText),
+                    text = stringResource(currentArtwork.titleResId),
                     style = MaterialTheme.typography.headlineSmall
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(
-                    text = stringResource(cityText),
+                    text = stringResource(currentArtwork.cityResId),
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.offset(x = (10).dp, y = (10).dp)
                 )
@@ -112,30 +108,29 @@ fun One() {
                 verticalAlignment = Alignment.Top
             ) {
                 Button(
-                    onClick = { if (result > 1){
-                        result--
-                    } else {
-                        result = 4
-                    } },
+                    onClick = { showPreviousArtwork() },
                     modifier = Modifier.offset(x = (10).dp, y = (110).dp)
                 ) { Text(stringResource(R.string.button_up)) }
                 Spacer( modifier = Modifier.width(100.dp))
                 Button(
-                    onClick = { if (result < 4){
-                        result++
-                    } else {
-                        result = 1
-                    } },
+                    onClick = { showNextArtwork() },
                     modifier = Modifier.offset(x = (-15).dp, y = (110).dp)
                 ) { Text(stringResource(R.string.button_next)) }
             }
         }
     }
 }
+
+data class ArtworkData(
+    val imageResId: Int,
+    val titleResId: Int,
+    val cityResId: Int
+)
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     Art_CapitalsTheme {
-        One()
+        ArtworkScreen()
     }
 }
