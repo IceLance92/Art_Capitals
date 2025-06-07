@@ -56,7 +56,8 @@ fun ArtworkScreen() {
         ArtworkData(R.drawable.saratov, R.string.saratov_title, R.string.saratov_city),
         ArtworkData(R.drawable.kazan, R.string.kazan_title, R.string.kazan_city),
         ArtworkData(R.drawable.toliatti, R.string.toliati_title, R.string.toliati_city),
-        ArtworkData(R.drawable.penza, R.string.penza_title, R.string.penza_city)
+        ArtworkData(R.drawable.penza, R.string.penza_title, R.string.penza_city),
+        ArtworkData(R.drawable.engelsl, R.string.engels_title, R.string.engels_city)
     )
 
     val currentArtwork = artworks[currentArtworkIndex]

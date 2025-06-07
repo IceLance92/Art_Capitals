@@ -8,6 +8,8 @@
     <string name="toliati_city">Был основан в 1737 году Василием Татищевым как город-крепость Ставрополь</string>
     <string name="penza_title">Пенза</string>
     <string name="penza_city">Была основана в 1663 году как город-крепость воеводой Ю.Е. Котраским по указу царя Алексея Михайловича от 3(13) мая 1663 года</string>
+    <string name="engels_title">Энгельс</string>
+    <string name="engels_city">Основан в 1747 году чумаками из Полтавской и Харьковской губерний.</string>
     <string name="button_up">Назад</string>
     <string name="button_next">Вперед</string>
 </resources>
